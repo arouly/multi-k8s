@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t aymanacc/react-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run -e CI=true aymanacc/react-test npm test
+
+after_sucess:
+  - docker build -t aymanacc/multi-client ./client
+  - docker build -t aymanacc/multi-nginx ./nginx
+  - docker build -t aymanacc/multi-server ./server
+  - docker build -t aymanacc/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
+  - docker push aymanacc/multi-client 
+  - docker push aymanacc/multi-nginx
+  - docker push aymanacc/multi-server
+  - docker push aymanacc/multi-worker
