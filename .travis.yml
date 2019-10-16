@@ -6,7 +6,7 @@ services:
 before_install:
   - docker build -t aymanacc/react-test -f ./client/Dockerfile.dev ./client
 
-scripts:
+script:
   - docker run -e CI=true aymanacc/react-test npm test
 
 after_sucess:
