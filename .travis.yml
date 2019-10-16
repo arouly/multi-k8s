@@ -9,7 +9,7 @@ before_install:
 script:
   - docker run -e CI=true aymanacc/react-test npm test
 
-after_sucess:
+after_success:
   - docker build -t aymanacc/multi-client ./client
   - docker build -t aymanacc/multi-nginx ./nginx
   - docker build -t aymanacc/multi-server ./server
