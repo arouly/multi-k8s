@@ -14,7 +14,7 @@ after_success:
   - docker build -t aymanacc/multi-nginx ./nginx
   - docker build -t aymanacc/multi-server ./server
   - docker build -t aymanacc/multi-worker ./worker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push aymanacc/multi-client 
   - docker push aymanacc/multi-nginx
   - docker push aymanacc/multi-server
